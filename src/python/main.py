@@ -13,7 +13,8 @@ pd.set_option('display.max_columns', None)
 
 def util_load_toml():
     rel_path = r'rmt-is-ok\src\python\configs\trusted_sellers.toml'
-    with open(rel_path, mode='rb') as f:
+    full_path = os.path.abspath(rel_path)
+    with open(full_path, mode='rb') as f:
         return tomli.load(f)
 
 @dataclass
@@ -150,12 +151,11 @@ class Transformations:
         return df
    
 
-    def save_csv(self):
+    def save_csv(self, input_df: pd.DataFrame):
         ts_short = pendulum.now().strftime('%Y-%m-%d-%H%M%S')
-        df = self.create_prices_data()
         # open a file in /src/data/ and write the dataframe to it
         with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', f'rmt_data_{ts_short}.csv')), 'w+', newline='') as f:
-            df.to_csv(f, index=False)
+            input_df.to_csv(f, index=False)
 
     def send_to_pg(self):
         pg = create_engine('postgresql://user:password@localhost:5432/rmt_data', connect_args={'options': '-csearch_path=schema'})
@@ -165,6 +165,7 @@ class Transformations:
 
 if __name__ == '__main__':
     t = Transformations()
-    t.save_csv()
-    t.send_to_pg()
+    df = t.create_prices_data()
+    t.save_csv(df)
+    t.send_to_pg(df)
     
