@@ -22,8 +22,8 @@ class TradeData:
     currency_map = {
         "6": "EXALT",
         "4": "CHAOS",
-        "15": "DIVINE"
-        "24": "MIRROR"
+        "15": "DIVINE",
+        "24": "MIRROR",
         }
     
     def _make_poetrade_urls_list(self, map_of_currency_to_id: Dict[str, str]
