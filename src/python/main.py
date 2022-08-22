@@ -12,7 +12,7 @@ pd.set_option('display.max_colwidth', None)
 pd.set_option('display.max_columns', None)  
 
 def util_load_toml():
-    rel_path = r'rmt-is-ok\src\python\configs\trusted_sellers.toml'
+    rel_path = r'src\python\configs\trusted_sellers.toml'
     full_path = os.path.abspath(rel_path)
     with open(full_path, mode='rb') as f:
         return tomli.load(f)
