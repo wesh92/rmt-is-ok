@@ -6,6 +6,7 @@ from typing import Dict, List, Union
 import tomli
 import pendulum
 import os
+from sqlalchemy import create_engine
 
 pd.set_option('display.max_colwidth', None)
 pd.set_option('display.max_columns', None)  
@@ -135,7 +136,6 @@ class Transformations:
     # then multiply the pay price by pay value.
     def create_prices_data(self):
         ts = pendulum.now().strftime('%Y-%m-%d %H:%M:%S')
-        ts_short = pendulum.now().strftime('%Y-%m-%d-%H%M%S')
         df = self.select_first_instance()
         recv_price = df['recv_price'].astype(float)
         recv_value = df['recv_value'].astype(float)
@@ -146,10 +146,24 @@ class Transformations:
         df['rmt_diff'] = round(df['recv_cost'], 2) - round(df['pay_cost'], 2)
         df['rmt_diff_percent'] = df['rmt_diff'] / df['pay_cost']
         df['timestamp'] = ts
+        return df
+   
+
+    def save_csv(self):
+        ts_short = pendulum.now().strftime('%Y-%m-%d-%H%M%S')
+        df = self.create_prices_data()
         # open a file in /src/data/ and write the dataframe to it
         with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', f'rmt_data_{ts_short}.csv')), 'w+', newline='') as f:
             df.to_csv(f, index=False)
 
+    def send_to_pg(self):
+        pg = create_engine('postgresql://user:password@localhost:5432/rmt_data', connect_args={'options': '-csearch_path=schema'})
+        df = self.create_prices_data()
+        df.to_sql('rmt_data', pg, if_exists='append', index=False)
+        
 
 if __name__ == '__main__':
-    Transformations().create_prices_data()
+    t = Transformations()
+    t.save_csv()
+    t.send_to_pg()
+    
