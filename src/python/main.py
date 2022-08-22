@@ -24,7 +24,7 @@ class TradeData:
         "6": "EXALT",
         "4": "CHAOS",
         "15": "DIVINE",
-        "24": "MIRROR",
+        "24": "MIRROR"
         }
     
     def _make_poetrade_urls_list(self, map_of_currency_to_id: Dict[str, str]
@@ -157,10 +157,9 @@ class Transformations:
         with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', f'rmt_data_{ts_short}.csv')), 'w+', newline='') as f:
             input_df.to_csv(f, index=False)
 
-    def send_to_pg(self):
+    def send_to_pg(self, input_df: pd.DataFrame):
         pg = create_engine('postgresql://user:password@localhost:5432/rmt_data', connect_args={'options': '-csearch_path=schema'})
-        df = self.create_prices_data()
-        df.to_sql('rmt_data', pg, if_exists='append', index=False)
+        input_df.to_sql('rmt_data', pg, if_exists='append', index=False)
         
 
 if __name__ == '__main__':
