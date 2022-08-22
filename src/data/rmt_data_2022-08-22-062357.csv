@@ -1,3 +1,0 @@
-pay_price,pay_currency,pay_value,recv_currency,recv_value,stock,recv_price,recv_cost,pay_cost,rmt_diff,rmt_diff_percent,timestamp
-0.3916,EXALT,1.0,CHAOS,9.0,2,0.02993,0.26937,0.3916,-0.12,-0.30643513789581206,2022-08-22 06:23:57
-3.43,DIVINE,1.0,CHAOS,141.0,24,0.02993,4.22013,3.43,0.7899999999999996,0.23032069970845467,2022-08-22 06:23:57
