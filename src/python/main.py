@@ -137,7 +137,7 @@ class Transformations:
     # math time, multiply the recv price by recv value.
     # then multiply the pay price by pay value.
     def create_prices_data(self):
-        ts = pendulum.now().strftime('%Y-%m-%d %H:%M:%S')
+        ts = pendulum.now('UTC').strftime('%Y-%m-%d %H:%M:%S')
         df = self.select_first_instance()
         recv_price = df['recv_price'].astype(float)
         recv_value = df['recv_value'].astype(float)
@@ -152,7 +152,7 @@ class Transformations:
    
 
     def save_csv(self, input_df: pd.DataFrame):
-        ts_short = pendulum.now().strftime('%Y-%m-%d-%H%M%S')
+        ts_short = pendulum.now('UTC').strftime('%Y-%m-%d-%H%M%S')
         # open a file in /src/data/ and write the dataframe to it
         with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', f'rmt_data_{ts_short}.csv')), 'w+', newline='') as f:
             input_df.to_csv(f, index=False)
