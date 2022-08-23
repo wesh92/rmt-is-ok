@@ -11,9 +11,9 @@ from sqlalchemy import create_engine
 pd.set_option('display.max_colwidth', None)
 pd.set_option('display.max_columns', None)  
 
+
 def util_load_toml():
-    rel_path = r'src\python\configs\trusted_sellers.toml'
-    full_path = os.path.abspath(rel_path)
+    full_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'python', 'configs', 'trusted_sellers.toml'))
     with open(full_path, mode='rb') as f:
         return tomli.load(f)
 
@@ -158,7 +158,7 @@ class Transformations:
             input_df.to_csv(f, index=False)
 
     def send_to_pg(self, input_df: pd.DataFrame):
-        pg = create_engine('postgresql://user:password@localhost:5432/rmt_data', connect_args={'options': '-csearch_path=schema'})
+        pg = create_engine('postgresql://user:password@localhost:5432/rmt_data', connect_args={'options': '-csearch_path=schema_name_here'})
         input_df.to_sql('rmt_data', pg, if_exists='append', index=False)
         
 
