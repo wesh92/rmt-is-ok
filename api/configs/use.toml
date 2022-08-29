@@ -1,0 +1,23 @@
+trusted_sellers = ["HellenWong", "CNLTeam", "SunRise", "SophiaTaylor"]
+
+# This list must be updated EVERY LEAGUE!
+[[currencies]]
+currency = "Exalted"
+url = "https://www.g2g.com/offer/-PC--Kalandra-Standard---Exalted-Orb?service_id=lgc_service_1&brand_id=lgc_game_19398&fa=lgc_19398_tier%3Algc_19398_tier_42693%7Clgc_19398_server%3Algc_19398_server_46290&sort=lowest_price&include_offline=0"
+id = "6"
+
+[[currencies]]
+currency = "Divine"
+url = "https://www.g2g.com/offer/-PC--Kalandra-Standard---Divine-Orb?service_id=lgc_service_1&brand_id=lgc_game_19398&fa=lgc_19398_tier%3Algc_19398_tier_42692%7Clgc_19398_server%3Algc_19398_server_46290&sort=lowest_price&include_offline=0"
+id = "15"
+
+[[currencies]]
+currency = "Chaos"
+url = "https://www.g2g.com/offer/-PC--Kalandra-Standard---Chaos-Orb?service_id=lgc_service_1&brand_id=lgc_game_19398&fa=lgc_19398_tier%3Algc_19398_tier_42689%7Clgc_19398_server%3Algc_19398_server_46290&sort=lowest_price&include_offline=0"
+id = "4"
+
+
+[[currencies]]
+currency = "Mirror"
+url = "https://www.g2g.com/offer/-PC--Kalandra-Standard---Mirror-of-Kalandra?service_id=lgc_service_1&brand_id=lgc_game_19398&fa=lgc_19398_tier%3Algc_19398_tier_42698%7Clgc_19398_server%3Algc_19398_server_46290&sort=lowest_price&include_offline=0"
+id = "24"
