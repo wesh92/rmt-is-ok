@@ -129,5 +129,4 @@ dmypy.json
 .pyre/
 *.csv
 src/python/main_personal.py
-*.bat
 src/run.bat
