@@ -1,3 +1,3 @@
-cd C:\PATH\TO\GITHUB\
-set PYTHONIOENCODING=utf8 && python -u "C:\PATH\TO\GITHUB\rmt-is-ok\src\python\main.py"
+cd C:\Users\musei\Documents\GitHub
+set PYTHONIOENCODING=utf8 && python -u "c:\Users\musei\Documents\GitHub\rmt-is-ok\src\python\main_personal.py"
 exit
