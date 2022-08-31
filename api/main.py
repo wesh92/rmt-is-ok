@@ -3,22 +3,10 @@ from getters.rmt_site import get_rmt_data
 from transforms.currency_purchase import currency_purchase
 from fastapi import FastAPI
 from pydantic import BaseModel
-from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
+import os
 
 app = FastAPI()
-
-origins = [
-    "http://localhost",
-    "http://localhost:8000",
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 class RMTBase(BaseModel):
@@ -93,3 +81,6 @@ async def currency_purchase_detailed(pay_currency: int, recv_currency: int):
 async def currency_purchase_simple(pay_currency: int, recv_currency: int):
     output = currency_purchase(pay_currency, recv_currency, method="simple")
     return output
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
